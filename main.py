@@ -16,6 +16,8 @@ DATABASE_NAME = ''
 
 NEXT_PAYMENT_DATE_FILED = ''
 PAYMENT_AMOUNT_FIELD = ''
+CUSTOMER_WHATSAPP_FIELD = ''
+PROD_NAME_FIELD = ''
 
 
 URI = ''
@@ -45,7 +47,7 @@ def set_to_midnight(date):
 
     new_date2 = datetime.strptime(new_date,'%Y-%m-%dT%H:%M:%S')  
 
-    print(f'processed date {new_date2}')
+
 
     return new_date2
 
@@ -53,13 +55,13 @@ today_set_to_midnight = set_to_midnight(today_with_time)
 
 
 
-customer_with_payment_due = collection.find({'next_payment_datetime_local':today_set_to_midnight})
+customer_with_payment_due = collection.find({NEXT_PAYMENT_DATE_FILED ':today_set_to_midnight})
 
 for customer in customer_with_payment_due:
-    print(customer)
-    customer_wa = customer['customer_wa']
-    payment = customer['monthly']
-    prod_name = customer['prod_name']
+
+    customer_wa = customer[CUSTOMER_WHATSAPP_FIELD]
+    payment = customer[PAYMENT_AMOUNT_FIELD]
+    prod_name = customer[PROD_NAME_FIELD]
     message = twilio_client.messages.create(
                               content_sid='HXXXXXX',
                               from_='MGXXXXXXX',
@@ -68,6 +70,5 @@ for customer in customer_with_payment_due:
                                   '2': prod_name
                               }),
                               to=f'whatsapp:{customer_wa}')
-
 
 
