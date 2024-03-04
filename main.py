@@ -9,17 +9,17 @@ import re
 
 
 
-ACCOUNT_SID = 'AC3cfe89f921df11581c47c62185ff09d5'
-AUTH_TOKEN ='fdf83f883446678cf8e581346da1d3c8'
+ACCOUNT_SID = ''
+AUTH_TOKEN = ''
 
-DATABASE_NAME = 'PWA'
-
-
-NEXT_PAYMENT_DATE_FILED = 'next_payment_datetime_local'
-PAYMENT_AMOUNT_FIELD = 'monthly'
+DATABASE_NAME = ''
 
 
-URI = 'mongodb+srv://tharusha:accessMDBtharushaAuTh@cluster0.jdm7esq.mongodb.net/'
+NEXT_PAYMENT_DATE_FILED = ''
+PAYMENT_AMOUNT_FIELD = ''
+
+
+URI = ''
 
 
 mongo_client = MongoClient(URI, server_api=ServerApi('1'))
@@ -36,7 +36,7 @@ except Exception as e:
     print(e)
 
     
-today_with_time = requests.get("http://worldtimeapi.org/api/timezone/Asia/Colombo").json()['datetime']
+today_with_time = requests.get("http://worldtimeapi.org/api/timezone/").json()['datetime']
 
 
 def set_to_midnight(date):
@@ -62,8 +62,8 @@ for customer in customer_with_payment_due:
     payment = customer['monthly']
     prod_name = customer['prod_name']
     message = twilio_client.messages.create(
-                              content_sid='HX6f7fdd244d2ec7fe440de1823321fa73',
-                              from_='MG878709d3d1a4e8522ecccba19b666a46',
+                              content_sid='HXXXXXX',
+                              from_='MGXXXXXXX',
                               content_variables=json.dumps({
                                   '1': str(payment),
                                   '2': prod_name
