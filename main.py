@@ -1,4 +1,3 @@
-# Download the helper library from https://www.twilio.com/docs/python/install
 from twilio.rest import Client
 import json
 import requests
@@ -9,7 +8,7 @@ import re
 
 
 
-ACCOUNT_SID = ''
+TWILIO_ACCOUNT_SID = ''
 AUTH_TOKEN = ''
 
 DATABASE_NAME = ''
@@ -24,10 +23,10 @@ URI = ''
 
 mongo_client = MongoClient(URI, server_api=ServerApi('1'))
 db = mongo_client[DATABASE_NAME]
-collection = db.installment_orders
+collection = db.COLLECTION_NAME
 
 
-twilio_client = Client(ACCOUNT_SID, AUTH_TOKEN)
+twilio_client = Client(TWILIO_ACCOUNT_SID, AUTH_TOKEN)
 
 try:
     mongo_client.admin.command('ping')
@@ -70,22 +69,5 @@ for customer in customer_with_payment_due:
                               }),
                               to=f'whatsapp:{customer_wa}')
 
-
-
-
-
-# client = Client(ACCOUNT_SID, AUTH_TOKEN)
-
-# message = client.messages.create(
-#                               content_sid='HX6f7fdd244d2ec7fe440de1823321fa73',
-#                               from_='MG878709d3d1a4e8522ecccba19b666a46',
-#                               content_variables=json.dumps({
-#                                   '1': '50',
-#                                   '2':'speaker'
-#                               }),
-#                               to='whatsapp:+94787124629'
-#                           )
-
-# print(message.sid)
 
 
